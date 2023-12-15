@@ -5,6 +5,7 @@
     background-color: #0070C0;
     padding: clamp(1vw, 1vw, 15px);
     justify-content: space-between;
+    border-bottom: 3px solid black;
 }
 
 .headerContainer div {
@@ -96,6 +97,7 @@
 @media only screen and (max-width: 600px) {
     .headerContainer {
         padding: clamp(3vw, 4vw, 50px);
+        border-bottom: 1px solid black;
     }
 
     .headerContainer p {

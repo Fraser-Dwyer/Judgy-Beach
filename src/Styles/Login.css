@@ -1,0 +1,68 @@
+.loginContainer {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: right;
+    padding-right: 3vw;
+}
+
+.logoContainer img {
+    width: 30vw;
+}
+
+.formContainer {
+    margin-left: 3vw;
+    background-color: white;
+    color: black;
+    border: 5px solid black;
+    border-radius: 15px;
+    width: 30vw;
+    height: fit-content;
+    padding: 0vw 2vw 1vw 2vw;
+
+}
+
+.formContainer h2 {
+    padding: 1vw 0vw;
+    font-size: clamp(1vw, 2.5vw, 40px);
+}
+
+.inputForm input {
+    width: 100%;
+    padding: clamp(0.5vw, 1vw, 10px);
+    margin-bottom: 1vw;
+    font-size: clamp(1vw, 1.5vw, 20px);
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Preahvihear', sans-serif;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonContainer button {
+    font-size: clamp(1vw, 1.5vw, 20px);
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Preahvihear', sans-serif;
+    color: white;
+    background-color: #0070C0;
+    padding: clamp(0.5vw, 1vw, 10px) clamp(1vw, 2vw, 20px);
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.buttonContainer button:hover {
+    cursor: pointer;
+    background-color: #005a9b;
+}
