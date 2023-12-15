@@ -52,16 +52,12 @@
     align-items: center;
 }
 
-.hamburger p {
-    font-size: clamp(1vw, 2vw, 40px);
-}
-
-.hamburger div {
+.hamburger div:first-of-type {
     display: flex;
     align-items: center;
 }
 
-.hamburger div p {
+.hamburger div:first-child p {
     font-size: clamp(2vw, 4vw, 50px);
     margin-right: clamp(1vw, 2vw, 40px);
 }
@@ -89,8 +85,24 @@
     cursor: pointer;
 }
 
-.firstLink {
+.links {
+    display: inline-block;
+    font-size: clamp(1vw, 1.5vw, 30px);
+    width: fit-content
+}
+
+.links:first-child {
     margin-top: 1vw;
+}
+
+.links p:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    color: #0070C0
+}
+
+.links p {
+    font-size: clamp(2vw, 3vw, 40px);
 }
 
 /* This is for mobile phones upto screen width of 600px */

@@ -3,8 +3,10 @@ import hamburgerIcon from "../Images/hamburgerIconWhite.png";
 import profileIcon from "../Images/profileIcon.png";
 import crossIcon from "../Images/crossIcon.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [hamburgerClass, setHamburgerClass] = useState(
     "hamburger hamburgerClosed"
   );
@@ -34,8 +36,10 @@ export default function Header() {
             <img src={crossIcon} alt="Cross Icon" />
           </div>
         </div>
-        <p className="firstLink">Link One</p>
-        <p>Link Two</p>
+        <div className="links">
+          <p onClick={() => navigate("/login")}>Log In</p>
+          <p onClick={() => navigate("/signup")}>Sign Up</p>
+        </div>
       </div>
     </>
   );
