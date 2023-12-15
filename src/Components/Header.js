@@ -34,7 +34,7 @@ export default function Header() {
             <img src={crossIcon} alt="Cross Icon" />
           </div>
         </div>
-        <p>Link One</p>
+        <p className="firstLink">Link One</p>
         <p>Link Two</p>
       </div>
     </>
