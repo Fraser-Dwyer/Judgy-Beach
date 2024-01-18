@@ -11,27 +11,26 @@ const Gavel = require("../Images/gavel-animation.json");
 
 export default function Header() {
   const navigate = useNavigate();
-  const [hamburgerClass, setHamburgerClass] = useState(
-    "hamburger hamburgerClosed"
-  );
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
   const sideMenu = document.querySelector("#sideMenu");
 
   const openMenu = () => {
-    sideMenu.classList.remove("translate-x-[-120%]");
+    sideMenu.classList.remove("translate-x-[-100%]");
     sideMenu.classList.add("translate-x-[0%]");
+    sideMenu.classList.add("shadow-3xl");
   };
 
   const closeMenu = () => {
     sideMenu.classList.remove("translate-x-[0%]");
-    sideMenu.classList.add("translate-x-[-120%]");
+    sideMenu.classList.remove("shadow-3xl");
+    sideMenu.classList.add("translate-x-[-100%]");
   };
 
   return (
     <>
       <div
-        className="absolute bg-white h-full shadow-3xl border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
+        className="absolute bg-white h-full border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
         id="sideMenu"
       >
         <div className="flex justify-between p-[3vw] items-center sm:p-[27px]">
@@ -81,10 +80,7 @@ export default function Header() {
         <div className="">
           <div>
             <p>Judgy Beach</p>
-            <div
-              className=""
-              onClick={() => setHamburgerClass("hamburger hamburgerClosed")}
-            >
+            <div className="">
               <img src={crossIcon} alt="Cross Icon" className="w-[50px]" />
             </div>
           </div>
