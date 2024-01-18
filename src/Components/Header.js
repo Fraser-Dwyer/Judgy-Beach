@@ -16,15 +16,45 @@ export default function Header() {
   );
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
+  const sideMenu = document.querySelector("#sideMenu");
+
+  const openMenu = () => {
+    sideMenu.classList.remove("translate-x-[-120%]");
+    sideMenu.classList.add("translate-x-[0%]");
+  };
+
+  const closeMenu = () => {
+    sideMenu.classList.remove("translate-x-[0%]");
+    sideMenu.classList.add("translate-x-[-120%]");
+  };
 
   return (
     <>
+      <div
+        className="absolute bg-white h-full shadow-3xl border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
+        id="sideMenu"
+      >
+        <div className="flex justify-between p-[3vw] items-center">
+          <p className="text-[6vw] mr-[8vw]">Judgy Beach</p>
+          <img
+            src={crossIcon}
+            alt="Close Icon"
+            className="w-[5vw] h-[5vw]"
+            onClick={() => closeMenu()}
+          />
+        </div>
+        <ul className="p-[3vw] [&>*]:mb-[3vw] [&>*]:text-[4vw]">
+          <li>Sign Up</li>
+          <li>Log In</li>
+          <li>Third Option</li>
+        </ul>
+      </div>
       <div className="w-full flex justify-between bg-primary border-b-black border-b-2 p-[3vw] sm:p-[25px]">
         <div className="flex items-center">
           <img
             src={hamburgerIcon}
             alt="Hamburger menu icon"
-            onClick={() => setHamburgerClass("hamburger hamburgerOpen")}
+            onClick={() => openMenu()}
             className="w-[6vw] sm:w-[56px]"
           />
         </div>

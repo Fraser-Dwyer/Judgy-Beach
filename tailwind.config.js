@@ -16,6 +16,9 @@ module.exports = {
         butText: "rgba(var(--but-text))",
         butHover: "rgba(var(--but-hover))",
       },
+      boxShadow: {
+        "3xl": "0 35px 60px 5px rgba(0, 0, 0, 1)",
+      },
     },
   },
   plugins: [],
