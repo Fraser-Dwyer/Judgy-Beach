@@ -34,22 +34,24 @@ export default function Header() {
         className="absolute bg-white h-full shadow-3xl border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
         id="sideMenu"
       >
-        <div className="flex justify-between p-[3vw] items-center">
-          <p className="text-[6vw] mr-[8vw]">Judgy Beach</p>
+        <div className="flex justify-between p-[3vw] items-center sm:p-[27px]">
+          <p className="text-[6vw] mr-[8vw] sm:text-[54px] sm:mr-[72px]">
+            Judgy Beach
+          </p>
           <img
             src={crossIcon}
             alt="Close Icon"
-            className="w-[5vw] h-[5vw]"
+            className="w-[5vw] h-[5vw] sm:w-[45px] sm:h-[45px]"
             onClick={() => closeMenu()}
           />
         </div>
-        <ul className="p-[3vw] [&>*]:mb-[3vw] [&>*]:text-[4vw]">
+        <ul className="p-[3vw] [&>*]:mb-[3vw] [&>*]:text-[4vw] sm:p-[27px] sm:[&>*]:mb-[27px] sm:[&>*]:text-[36px]">
           <li>Sign Up</li>
           <li>Log In</li>
           <li>Third Option</li>
         </ul>
       </div>
-      <div className="w-full flex justify-between bg-primary border-b-black border-b-2 p-[3vw] sm:p-[25px]">
+      <div className="w-full flex justify-between bg-primary border-b-black border-b-2 p-[3vw] sm:p-[15px]">
         <div className="flex items-center">
           <img
             src={hamburgerIcon}
