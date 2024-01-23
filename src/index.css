@@ -5,11 +5,11 @@
 /* prettier-ignore */
 @layer components {
   .btn {
-    @apply border-solid border-2 rounded-md px-[4vw] py-[1vw] text-[5vw] sm:px-[20px] sm:py-[10px] sm:text-3xl sm:hover:scale-[1.02];
+    @apply rounded-md px-[4vw] py-[1vw] text-md sm:px-[20px] sm:py-[7px] sm:text-mdPC;
   }
 
   .prim {
-    @apply bg-butPrimary text-butText border-none hover:bg-butHover
+    @apply bg-butPrimary text-butText borders hover:bg-butHover
   }
 
   .borders {
@@ -17,7 +17,11 @@
   }
 
   .input {
-    @apply box-content borders p-[1vw] w-[85%] mb-[2vw] mx-[3vw] text-[4vw] sm:text-2xl sm:p-[10px] sm:mb-[15px] sm:w-full sm:mx-0
+    @apply borders p-[1vw] w-full mb-[2vw] text-md sm:text-mdPC sm:p-[7px] sm:mb-[10px] sm:w-full sm:mx-0
+  }
+
+  .link {
+    @apply hover:text-butPrimary hover:scale-[1.01] hover:cursor-pointer
   }
 }
 

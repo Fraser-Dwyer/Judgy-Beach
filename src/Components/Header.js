@@ -1,16 +1,17 @@
-import "../Styles/Header.css";
 import hamburgerIcon from "../Images/hamburgerIconWhite.png";
 import profileIcon from "../Images/profileIcon.png";
 import crossIcon from "../Images/crossIcon.png";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PlayOnce from "./PlayOnce";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
 const Gavel = require("../Images/gavel-animation.json");
 
 export default function Header() {
   const navigate = useNavigate();
+  const { userInfo } = useContext(UserContext);
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
   const sideMenu = document.querySelector("#sideMenu");
@@ -27,7 +28,12 @@ export default function Header() {
     sideMenu.classList.add("translate-x-[-100%]");
   };
 
-  return (
+  const linkClicked = (destination) => {
+    closeMenu();
+    navigate(destination);
+  };
+
+  return userInfo.username !== undefined ? (
     <>
       <div
         className="absolute bg-white h-full border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
@@ -40,14 +46,20 @@ export default function Header() {
           <img
             src={crossIcon}
             alt="Close Icon"
-            className="w-[5vw] h-[5vw] sm:w-[45px] sm:h-[45px]"
+            className="w-[5vw] h-[5vw] sm:w-[45px] sm:h-[45px] sm:hover:cursor-pointer sm:hover:scale-[1.05]"
             onClick={() => closeMenu()}
           />
         </div>
         <ul className="p-[3vw] [&>*]:mb-[3vw] [&>*]:text-[4vw] sm:p-[27px] sm:[&>*]:mb-[27px] sm:[&>*]:text-[36px]">
-          <li>Sign Up</li>
-          <li>Log In</li>
-          <li>Third Option</li>
+          <li onClick={() => linkClicked("/signup")} className="link">
+            Sign Up
+          </li>
+          <li onClick={() => linkClicked("/login")} className="link">
+            Log In
+          </li>
+          <li onClick={() => linkClicked("/signup")} className="link">
+            Third Option
+          </li>
         </ul>
       </div>
       <div className="w-full flex justify-between bg-primary border-b-black border-b-2 p-[3vw] sm:p-[15px]">
@@ -56,7 +68,7 @@ export default function Header() {
             src={hamburgerIcon}
             alt="Hamburger menu icon"
             onClick={() => openMenu()}
-            className="w-[6vw] sm:w-[56px]"
+            className="w-[6vw] sm:w-[54px] sm:hover:cursor-pointer sm:hover:scale-[1.05]"
           />
         </div>
         <div className="flex">
@@ -91,5 +103,7 @@ export default function Header() {
         </div>
       )}
     </>
+  ) : (
+    <></>
   );
 }
