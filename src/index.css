@@ -5,7 +5,7 @@
 /* prettier-ignore */
 @layer components {
   .btn {
-    @apply rounded-md px-[4vw] py-[1vw] text-md sm:px-[20px] sm:py-[7px] sm:text-mdPC;
+    @apply rounded-md px-[4vw] py-[2vw] text-md sm:px-[20px] sm:py-[7px] sm:text-mdPC;
   }
 
   .prim {
@@ -17,7 +17,7 @@
   }
 
   .input {
-    @apply borders p-[1vw] w-full mb-[2vw] text-md sm:text-mdPC sm:p-[7px] sm:mb-[10px] sm:w-full sm:mx-0
+    @apply borders p-[2vw] w-full mb-[2vw] text-md sm:text-mdPC sm:p-[7px] sm:mb-[10px] sm:w-full sm:mx-0
   }
 
   .link {
