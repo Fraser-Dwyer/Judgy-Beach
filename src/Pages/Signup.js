@@ -7,38 +7,89 @@ import googleLogo from "../Images/google-logo.png";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import PlayOnce from "../Components/PlayOnce";
 
+// Imports for the password eye
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
+
 const Gavel = require("../Images/gavel-animation-black.json");
 
-export default function Signup() {
+export default function Signup({ baseURL }) {
   const navigate = useNavigate();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
-  const [user, setUser] = useState(null);
+  const [googleUser, setGoogleUser] = useState(null);
+  const [normalUser, setNormalUser] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
+  // States of the eye for the password fields
+  const [passwordType, setPasswordType] = useState("password");
+  const [eyeIconPassword, setEyeIconPassword] = useState(eyeOff);
+  const [repeatPasswordType, setRepeatPasswordType] = useState("password");
+  const [eyeIconRepeatPassword, setRepeatEyeIconPassword] = useState(eyeOff);
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => setGoogleUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
 
   useEffect(() => {
-    if (user) {
+    if (googleUser) {
       axios
         .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`,
           {
             headers: {
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${googleUser.access_token}`,
               Accept: "application/json",
             },
           }
         )
-        .then((res) => {
-          setProfile(res.data);
-          console.log(res.data);
-        })
+        .then((res) => {})
         .catch((err) => console.log(err));
     }
-  }, [user]);
+  }, [googleUser]);
+
+  async function handleSignup(e) {
+    if (e !== undefined) {
+      e.preventDefault();
+    }
+
+    // Put in some input validation here once it all works okay
+
+    const pascalName = name.charAt(0).toUpperCase() + name.slice(1);
+
+    // If made it here, try to make new user
+    const response = await fetch(baseURL + "/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        name: pascalName,
+        username: username,
+        password: password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      console.log(response);
+    } else {
+      console.log(response);
+    }
+  }
+
+  // For the password Eye icon
+  const handleTogglePassword = (type, iconFunction, typeFunction) => {
+    if (type === "password") {
+      iconFunction(eye);
+      typeFunction("text");
+    } else {
+      iconFunction(eyeOff);
+      typeFunction("password");
+    }
+  };
 
   return (
     <>
@@ -76,18 +127,105 @@ export default function Signup() {
             <p className="text-xl font-bold text-left mb-[2vw] sm:text-xlPC sm:mb-[10px]">
               Sign Up
             </p>
-            <form className="">
-              <div className="flex justify-center sm:justify-start">
-                <input className="input" placeholder="Username"></input>
+            <form className="[&>div]:flex [&>div]:justify-center [&>div]:sm:justify-start">
+              <div>
+                <input
+                  id="firstName"
+                  autoComplete="off"
+                  className="input"
+                  placeholder="First Name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></input>
               </div>
-              <div className="flex justify-center sm:justify-start">
-                <input className="input" placeholder="Password"></input>
+              <div>
+                <input
+                  id="username"
+                  autoComplete="off"
+                  className="input"
+                  placeholder="Username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                ></input>
               </div>
-              <div className="flex justify-center sm:justify-start">
-                <input className="input" placeholder="Repeat Password"></input>
+              <div>
+                <input
+                  id="password"
+                  autoComplete="off"
+                  className="input"
+                  placeholder="Password"
+                  type={passwordType}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className="flex justify-around items-center"
+                  onClick={() =>
+                    handleTogglePassword(
+                      passwordType,
+                      setEyeIconPassword,
+                      setPasswordType
+                    )
+                  }
+                >
+                  {isSmallDevice && (
+                    <Icon
+                      className="absolute mr-[8vw] mb-[3vw]"
+                      icon={eyeIconPassword}
+                      size={"4vw"}
+                    />
+                  )}
+                  {!isSmallDevice && (
+                    <Icon
+                      className="absolute mr-10 mb-3"
+                      icon={eyeIconPassword}
+                      size={20}
+                    />
+                  )}
+                </span>
               </div>
-              <div className="flex justify-center">
-                <button className="btn prim w-full">Sign Up</button>
+              <div>
+                <input
+                  id="repeatPassword"
+                  autoComplete="off"
+                  className="input"
+                  placeholder="Repeat Password"
+                  type={repeatPasswordType}
+                  value={repeatPassword}
+                  onChange={(e) => setRepeatPassword(e.target.value)}
+                />
+                <span
+                  className="flex justify-around items-center"
+                  onClick={() =>
+                    handleTogglePassword(
+                      repeatPasswordType,
+                      setRepeatEyeIconPassword,
+                      setRepeatPasswordType
+                    )
+                  }
+                >
+                  {isSmallDevice && (
+                    <Icon
+                      className="absolute mr-[8vw] mb-[3vw]"
+                      icon={eyeIconRepeatPassword}
+                      size={"4vw"}
+                    />
+                  )}
+                  {!isSmallDevice && (
+                    <Icon
+                      className="absolute mr-10 mb-3"
+                      icon={eyeIconRepeatPassword}
+                      size={20}
+                    />
+                  )}
+                </span>
+              </div>
+              <div>
+                <button className="btn prim w-full" onClick={handleSignup}>
+                  Sign Up
+                </button>
               </div>
               <p className="text-md pt-[2vw] flex justify-center gap-0.5 sm:text-mdPC sm:pt-[10px]">
                 Already have an account?

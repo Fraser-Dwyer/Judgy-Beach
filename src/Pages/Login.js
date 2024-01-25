@@ -76,17 +76,14 @@ export default function Login() {
             <p className="text-xl font-bold text-left mb-[2vw] sm:text-xlPC sm:mb-[10px]">
               Log In
             </p>
-            <form className="">
-              <div className="flex justify-center sm:justify-start">
+            <form className="[&>div]:flex [&>div]:justify-center [&>div]:sm:justify-start">
+              <div>
                 <input className="input" placeholder="Username"></input>
               </div>
-              <div className="flex justify-center sm:justify-start">
+              <div>
                 <input className="input" placeholder="Password"></input>
               </div>
-              <div className="flex justify-center sm:justify-start">
-                <input className="input" placeholder="Repeat Password"></input>
-              </div>
-              <div className="flex justify-center">
+              <div>
                 <button className="btn prim w-full">Log In</button>
               </div>
               <p className="text-md pt-[2vw] flex justify-center gap-0.5 sm:text-mdPC sm:pt-[10px]">

@@ -7,7 +7,9 @@ import Signup from "./Pages/Signup.js";
 import { UserContextProvider } from "./UserContext.js";
 
 function App() {
-  const baseURL = "baseURL here";
+  // Development: "http://localhost:8000"
+  // Production: ""
+  const baseURL = "http://localhost:8000";
 
   return (
     <UserContextProvider>
