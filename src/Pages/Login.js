@@ -1,19 +1,27 @@
-import judgyBeachLogo from "../Images/judgyBeachLogo.png";
 import { useNavigate } from "react-router-dom";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import googleLogo from "../Images/google-logo.png";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import PlayOnce from "../Components/PlayOnce";
+import Branding from "../Components/Branding";
 
-const Gavel = require("../Images/gavel-animation-black.json");
+// Imports for the password eye
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
 
 export default function Login() {
   const navigate = useNavigate();
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 1280px)");
   const [user, setUser] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [profile, setProfile] = useState(null);
+
+  // States of the eye for the password fields
+  const [passwordType, setPasswordType] = useState("password");
+  const [eyeIconPassword, setEyeIconPassword] = useState(eyeOff);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -40,37 +48,21 @@ export default function Login() {
     }
   }, [user]);
 
+  // For the password Eye icon
+  const handleTogglePassword = (type, iconFunction, typeFunction) => {
+    if (type === "password") {
+      iconFunction(eye);
+      typeFunction("text");
+    } else {
+      iconFunction(eyeOff);
+      typeFunction("password");
+    }
+  };
+
   return (
     <>
       <div className="w-screen mt-[10vw] sm:mt-0 sm:flex sm:justify-center sm:items-center">
-        <div className="sm:max-w-[800px] sm:w-[60%] sm:items-center">
-          <div className="flex justify-center items-center">
-            <img
-              src={judgyBeachLogo}
-              alt="Judgy Beach Logo"
-              className="w-[40%] mb-[2vw] mr-[3vw] sm:mb-0 sm:w-[300px] sm:h-[300px]"
-            ></img>
-            <div className="w-[40%]">
-              <div className="flex items-center">
-                <p className="flex mr-[2vw] text-xxxl select-none sm:text-[65px] sm:mr-[15px]">
-                  Judgy
-                </p>
-                {isSmallDevice && <PlayOnce size="12vw" icon={Gavel} />}
-                {!isSmallDevice && <PlayOnce size="100px" icon={Gavel} />}
-              </div>
-              <p className="flex flex-1 text-[12vw] mt-[-2vw] select-none sm:text-[100px] sm:mt-[-20px]">
-                Beach
-              </p>
-            </div>
-          </div>
-          {!isSmallDevice && (
-            <div className="ml-[70px] mt-[20px]">
-              <ul className="text-xxlPC [&>*]:mb-[15px] font-bold">
-                <li>Always have an opinion and need to share it?</li>
-              </ul>
-            </div>
-          )}
-        </div>
+        <Branding />
         <div className="py-[8vw] flex justify-center sm:p-[10px] sm:items-center sm:w-[40%] sm:h-[100dvh]">
           <div className="w-3/4 borders bg-white p-[4vw] sm:max-w-[400px] sm:p-[20px]">
             <p className="text-xl font-bold text-left mb-[2vw] sm:text-xlPC sm:mb-[10px]">
@@ -78,10 +70,48 @@ export default function Login() {
             </p>
             <form className="[&>div]:flex [&>div]:justify-center [&>div]:sm:justify-start">
               <div>
-                <input className="input" placeholder="Username"></input>
+                <input
+                  id="firstName"
+                  className="input"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                ></input>
               </div>
               <div>
-                <input className="input" placeholder="Password"></input>
+                <input
+                  id="password"
+                  className="input"
+                  placeholder="Password"
+                  type={passwordType}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+                <span
+                  className="flex justify-around items-center"
+                  onClick={() =>
+                    handleTogglePassword(
+                      passwordType,
+                      setEyeIconPassword,
+                      setPasswordType
+                    )
+                  }
+                >
+                  {isSmallDevice && (
+                    <Icon
+                      className="absolute mr-[8vw] mb-[3vw]"
+                      icon={eyeIconPassword}
+                      size={"4vw"}
+                    />
+                  )}
+                  {!isSmallDevice && (
+                    <Icon
+                      className="absolute mr-10 mb-3"
+                      icon={eyeIconPassword}
+                      size={20}
+                    />
+                  )}
+                </span>
               </div>
               <div>
                 <button className="btn prim w-full">Log In</button>
