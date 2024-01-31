@@ -74,6 +74,7 @@ export default function Signup({ baseURL }) {
 
     if (response.ok) {
       console.log(response);
+      navigate("/login");
     } else {
       console.log(response);
     }

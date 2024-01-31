@@ -1,19 +1,20 @@
+import axios from "axios";
+import googleLogo from "../Images/google-logo.png";
+import Branding from "../Components/Branding";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { useNavigate } from "react-router-dom";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import googleLogo from "../Images/google-logo.png";
-import { useMediaQuery } from "@uidotdev/usehooks";
-import Branding from "../Components/Branding";
 
 // Imports for the password eye
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
-export default function Login() {
+export default function Login({ baseURL }) {
   const navigate = useNavigate();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 1280px)");
+
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +48,36 @@ export default function Login() {
         .catch((err) => console.log(err));
     }
   }, [user]);
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    if (username.length === 0 || password.length === 0) {
+      console.log("Enter something");
+      return;
+    }
+
+    var usernameLower = username.toLowerCase();
+    const response = await fetch(baseURL + "/login", {
+      method: "POST",
+      body: JSON.stringify({ username: usernameLower, password }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    if (response.ok) {
+      response.json().then((userInfo) => {
+        console.log(userInfo);
+        window.localStorage.setItem(
+          "CURRENT_USER_INFO",
+          JSON.stringify(userInfo)
+        );
+        console.log("Login good ya");
+        navigate("/");
+      });
+    } else {
+      console.log("login not good na");
+    }
+  }
 
   // For the password Eye icon
   const handleTogglePassword = (type, iconFunction, typeFunction) => {
@@ -114,7 +145,12 @@ export default function Login() {
                 </span>
               </div>
               <div>
-                <button className="btn prim w-full">Log In</button>
+                <button
+                  className="btn prim w-full"
+                  onClick={(e) => handleLogin(e)}
+                >
+                  Log In
+                </button>
               </div>
               <p className="text-md pt-[2vw] flex justify-center gap-0.5 sm:text-mdPC sm:pt-[10px]">
                 Don't have an account?

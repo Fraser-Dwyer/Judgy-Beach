@@ -1,10 +1,15 @@
-import { useContext } from "react";
-import { UserContext } from "../UserContext";
 import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const PrivateRoute = ({ children }) => {
-  const { userInfo } = useContext(UserContext);
-  return userInfo.username !== null ? children : <Navigate to="/login" />;
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("CURRENT_USER_INFO");
+    setUserInfo(JSON.parse(user));
+  }, []);
+
+  return userInfo !== null ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
