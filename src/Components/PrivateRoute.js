@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
     setUserInfo(JSON.parse(user));
   }, []);
 
-  return userInfo !== null ? children : <Navigate to="/login" />;
+  return userInfo.username !== null ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

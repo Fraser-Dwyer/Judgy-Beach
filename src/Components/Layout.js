@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 
 export default function Layout({ baseURL }) {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <main>
-      <Header baseURL={baseURL} />
+      {path !== "/login" && path !== "/signup" && <Header baseURL={baseURL} />}
       <Outlet />
     </main>
   );

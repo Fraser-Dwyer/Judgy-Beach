@@ -4,13 +4,13 @@ import crossIcon from "../Images/crossIcon.png";
 import { useNavigate } from "react-router-dom";
 import PlayOnce from "./PlayOnce";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Gavel = require("../Images/gavel-animation.json");
 
 export default function Header() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState(null);
+  const userInfo = window.localStorage.getItem("CURRENT_USER_INFO");
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
   const sideMenu = document.querySelector("#sideMenu");
@@ -32,7 +32,9 @@ export default function Header() {
     navigate(destination);
   };
 
-  return username !== null ? (
+  console.log(userInfo);
+
+  return userInfo !== null ? (
     <>
       <div
         className="absolute bg-white h-full border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
