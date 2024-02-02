@@ -20,7 +20,7 @@ export default function Home({ baseURL }) {
         </>
       )}
       <ReviewCard
-        title={"Best eggs going!"}
+        title={"Fraser's Fried Eggs"}
         author={"Fraser Dwyer"}
         date={"01/Feb/24 - 16:56 "}
         image={egg}
