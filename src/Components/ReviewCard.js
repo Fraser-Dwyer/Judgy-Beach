@@ -1,8 +1,11 @@
 import profileIcon from "../Images/profileIcon.png";
 import gavel from "../Images/gavel.png";
-import gavelOutline from "../Images/gavel-outline.png";
+import thumbsUp from "../Images/thumbs-up-outline.svg";
+import thumbsUpFilled from "../Images/thumb-2.png";
+import { useState } from "react";
 
 export default function ({ title, author, date, image, description }) {
+  const [liked, setLiked] = useState(false);
   const moreTextElement = document.querySelector("#more-btn");
   const lessTextElement = document.querySelector("#less-btn");
   const surTextElement = document.querySelector("#more-text");
@@ -49,14 +52,30 @@ export default function ({ title, author, date, image, description }) {
           </div>
           <div className="flex my-[1vw] items-center ml-[2vw]">
             <p className="font-bold">4.7 / 5.0</p>
-            <img
-              src={gavelOutline}
-              alt="Gavel"
-              className="w-[3.5vw] h-[3.5vw] mx-[1vw]"
-            />
+            <img src={gavel} alt="Gavel" className="w-[3vw] h-[3vw] mx-[1vw]" />
             <p className="mr-[1vw]">(14 Judges)</p>
           </div>
           <img src={image} alt="Post" className="" />
+          <div id="likeBar" className="">
+            {!liked && (
+              <div onClick={() => setLiked(!liked)}>
+                <img
+                  src={thumbsUp}
+                  alt="Thumbs Up"
+                  className="w-[6vw] h-[6vw]"
+                />
+              </div>
+            )}
+            {liked && (
+              <div onClick={() => setLiked(!liked)}>
+                <img
+                  src={thumbsUpFilled}
+                  alt="Thumbs Up Filled"
+                  className="w-[6vw] h-[6vw]"
+                />
+              </div>
+            )}
+          </div>
           {description.slice(150) !== null && (
             <p className="text-md ml-[2vw] mt-[2vw]">
               {description.slice(0, 150)}

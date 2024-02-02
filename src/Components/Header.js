@@ -4,7 +4,6 @@ import crossIcon from "../Images/crossIcon.png";
 import { useNavigate } from "react-router-dom";
 import PlayOnce from "./PlayOnce";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { useState, useEffect } from "react";
 
 const Gavel = require("../Images/gavel-animation.json");
 
