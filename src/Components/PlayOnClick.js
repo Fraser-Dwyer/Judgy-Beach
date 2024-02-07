@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Player } from "@lordicon/react";
 
-export default function PlayOnClick({ size, icon }) {
+export default function PlayOnClick({ size, icon, colour }) {
   const playerRef = useRef(null);
 
   const mouseOver = () => {
@@ -13,7 +13,7 @@ export default function PlayOnClick({ size, icon }) {
   return (
     <>
       <div onClick={mouseOver} className="iconDiv sm:hover:cursor-pointer">
-        <Player ref={playerRef} icon={icon} size={size} />
+        <Player ref={playerRef} icon={icon} size={size} colorize={colour} />
       </div>
     </>
   );
