@@ -3,10 +3,12 @@ import gavel from "../Images/gavel.png";
 import thumbsUp from "../Images/thumbs-up.json";
 import StaticIcon from "./StaticIcon";
 import speech from "../Images/speech.json";
+import CommentSection from "./CommentSection";
 import { useState } from "react";
 
 export default function ({ title, author, date, image, description }) {
   const [thumbsUpColour, setThumbsUpColour] = useState("#000000");
+  const [showComments, setShowComments] = useState(false);
   const moreTextElement = document.querySelector("#more-btn");
   const lessTextElement = document.querySelector("#less-btn");
   const surTextElement = document.querySelector("#more-text");
@@ -32,9 +34,23 @@ export default function ({ title, author, date, image, description }) {
       : setThumbsUpColour("#000000");
   };
 
+  const commentsFunction = () => {
+    setShowComments(!showComments);
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full bg-white">
+        {showComments && (
+          <CommentSection
+            comments={[
+              { username: "User1", comment: "Oh wow cant wait to try!" },
+              { username: "User2", comment: "Me too!!" },
+              { username: "User3", comment: "Slayyy Queen!" },
+            ]}
+            commentsFunction={commentsFunction}
+          />
+        )}
         <div className="flex items-center border-b-[1px] border-b-black p-[2vw]">
           <div className="flex items-center">
             <img src={profileIcon} alt="Profile" className="w-[10%]" />
@@ -57,12 +73,14 @@ export default function ({ title, author, date, image, description }) {
               className="w-[3.5vw] h-[3.5vw] mx-[1vw]"
             />
           </div>
-          <div className="flex my-[1vw] items-center ml-[2vw] text-lg">
+          <div className="flex items-center mb-[1vw] mt-[0.5vw] ml-[2vw] text-md">
             <p className="font-bold">4.7 / 5.0</p>
             <img src={gavel} alt="Gavel" className="w-[3vw] h-[3vw] mx-[1vw]" />
             <p className="mr-[1vw]">(14 Judges)</p>
           </div>
-          <img src={image} alt="Post" className="" />
+          <div className="flex justify-center">
+            <img src={image} alt="Post" className="" />
+          </div>
           <div id="likeBar" className="flex ml-[2vw] items-center">
             <div className="flex mt-[1vw]" onClick={likeAction}>
               <StaticIcon
@@ -72,9 +90,12 @@ export default function ({ title, author, date, image, description }) {
               />
               <p className="ml-[1vw] text-lg">19</p>
             </div>
-            <div className="flex mt-[1vw] ml-[4vw] items-center">
+            <div
+              className="flex mt-[1vw] ml-[4vw] items-center"
+              onClick={commentsFunction}
+            >
               <StaticIcon icon={speech} size={"8vw"} />
-              <p className="ml-[1vw] text-lg">4</p>
+              <p className="ml-[0.5vw] text-lg">4</p>
             </div>
           </div>
           {description.slice(150) !== null && (
