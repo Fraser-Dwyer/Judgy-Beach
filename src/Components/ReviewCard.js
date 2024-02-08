@@ -41,16 +41,16 @@ export default function ({ title, author, date, image, description }) {
   return (
     <div className="flex justify-center">
       <div className="w-full bg-white">
-        {showComments && (
-          <CommentSection
-            comments={[
-              { username: "User1", comment: "Oh wow cant wait to try!" },
-              { username: "User2", comment: "Me too!!" },
-              { username: "User3", comment: "Slayyy Queen!" },
-            ]}
-            commentsFunction={commentsFunction}
-          />
-        )}
+        <CommentSection
+          comments={[
+            { username: "User1", comment: "Oh wow cant wait to try!" },
+            { username: "User2", comment: "Me too!!" },
+            { username: "User3", comment: "Slayyy Queen!" },
+          ]}
+          showComments={showComments}
+          commentsFunction={commentsFunction}
+        />
+
         <div className="flex items-center border-b-[1px] border-b-black p-[2vw]">
           <div className="flex items-center">
             <img src={profileIcon} alt="Profile" className="w-[10%]" />

@@ -4,23 +4,26 @@ import crossIcon from "../Images/crossIcon.png";
 import { useNavigate } from "react-router-dom";
 import PlayOnce from "./PlayOnce";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { useRef } from "react";
 
 const Gavel = require("../Images/gavel-animation.json");
 
 export default function Header() {
   const navigate = useNavigate();
+  const sideMenuRef = useRef(null);
   const userInfo = window.localStorage.getItem("CURRENT_USER_INFO");
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 900px)");
-  const sideMenu = document.querySelector("#sideMenu");
 
   const openMenu = () => {
+    const sideMenu = sideMenuRef.current;
     sideMenu.classList.remove("translate-x-[-100%]");
     sideMenu.classList.add("translate-x-[0%]");
     sideMenu.classList.add("shadow-3xl");
   };
 
   const closeMenu = () => {
+    const sideMenu = sideMenuRef.current;
     sideMenu.classList.remove("translate-x-[0%]");
     sideMenu.classList.remove("shadow-3xl");
     sideMenu.classList.add("translate-x-[-100%]");
@@ -36,8 +39,8 @@ export default function Header() {
   return userInfo !== null ? (
     <>
       <div
-        className="absolute bg-white h-full border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%]"
-        id="sideMenu"
+        className="absolute bg-white h-full border-r-black border-r-2 left-0 transition ease-in-out translate-x-[-100%] z-50"
+        ref={sideMenuRef}
       >
         <div className="flex justify-between p-[3vw] items-center sm:p-[27px]">
           <p className="text-[6vw] mr-[8vw] pt-[0.5vw] sm:text-[54px] sm:mr-[72px]">

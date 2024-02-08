@@ -1,18 +1,31 @@
 import closeButton from "../Images/crossIcon.png";
 import Comment from "./Comment";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
-export default function CommentSection({ comments, commentsFunction }) {
-  const commentSectionRef = useRef(null);
-
+export default function CommentSection({
+  comments,
+  showComments,
+  commentsFunction,
+}) {
   const closeCommentSection = () => {
     commentsFunction();
   };
 
+  const variants = {
+    show: { bottom: 0, display: "block" },
+    hide: {
+      bottom: "-80vh",
+      transitionEnd: {
+        display: "none",
+      },
+    },
+  };
+
   return (
-    <div
-      ref={commentSectionRef}
-      className="w-screen bg-background absolute bottom-0 h-[65%] z-50"
+    <motion.div
+      className="w-screen bg-background absolute bottom-0 h-[65%] z-40"
+      variants={variants}
+      animate={showComments ? "show" : "hide"}
     >
       <div className="flex justify-between mb-[2vw]">
         <p className="p-[3vw] font-bold text-lg">Comments</p>
@@ -32,6 +45,6 @@ export default function CommentSection({ comments, commentsFunction }) {
           })}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
