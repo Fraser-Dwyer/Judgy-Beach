@@ -31,7 +31,9 @@ module.exports = {
         butHover: "rgba(var(--but-hover))",
       },
       boxShadow: {
+        // horizontal offset, vertical offset, blur, spread, colour
         "3xl": "0 35px 60px 5px rgba(0, 0, 0, 1)",
+        top: "0px -15px 40px 0px rgba(0, 0, 0, 1)",
       },
     },
   },

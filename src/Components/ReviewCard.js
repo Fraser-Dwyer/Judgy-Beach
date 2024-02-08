@@ -104,7 +104,7 @@ export default function ({ title, author, date, image, description }) {
               >
                 <StaticIcon
                   icon={thumbsUp}
-                  size={isSmallDevice ? "6vw" : "35px"}
+                  size={isSmallDevice ? "5vw" : "35px"}
                   colour={thumbsUpColour}
                 />
                 <p className="ml-[1vw] text-lg sm:ml-[5px] sm:text-lgPC">19</p>
@@ -136,7 +136,7 @@ export default function ({ title, author, date, image, description }) {
                   onClick={showMore}
                   className="font-bold text-md sm:text-lgPC sm:hover:cursor-pointer"
                 >
-                  Read more
+                  Show more
                 </span>
                 <span
                   id="less-btn"

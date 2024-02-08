@@ -23,7 +23,7 @@ export default function CommentSection({
 
   return (
     <motion.div
-      className="w-screen bg-background absolute bottom-0 h-[65%] z-40 sm:w-[800px]"
+      className="w-screen bg-[#999] absolute bottom-0 h-[65%] z-40 sm:w-[800px] hidden shadow-top"
       variants={variants}
       animate={showComments ? "show" : "hide"}
     >
