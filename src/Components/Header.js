@@ -34,8 +34,6 @@ export default function Header() {
     navigate(destination);
   };
 
-  console.log(userInfo);
-
   return userInfo !== null ? (
     <>
       <div

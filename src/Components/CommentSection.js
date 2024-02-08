@@ -23,17 +23,22 @@ export default function CommentSection({
 
   return (
     <motion.div
-      className="w-screen bg-background absolute bottom-0 h-[65%] z-40"
+      className="w-screen bg-background absolute bottom-0 h-[65%] z-40 sm:w-[800px]"
       variants={variants}
       animate={showComments ? "show" : "hide"}
     >
-      <div className="flex justify-between mb-[2vw]">
-        <p className="p-[3vw] font-bold text-lg">Comments</p>
-        <div className="p-[3vw]" onClick={() => closeCommentSection()}>
+      <div className="flex justify-between mb-[2vw] items-center sm:mb-[0px]">
+        <p className="p-[3vw] font-bold text-lg sm:p-[20px] sm:text-xlPC">
+          Comments
+        </p>
+        <div
+          className="p-[3vw] sm:p-[20px] sm:hover:cursor-pointer sm:hover:scale-[1.05]"
+          onClick={() => closeCommentSection()}
+        >
           <img
             src={closeButton}
             alt="Close Button"
-            className="w-[6vw] h-[6vw]"
+            className="w-[6vw] h-[6vw] sm:w-[30px] sm:h-[30px]"
           />
         </div>
       </div>
