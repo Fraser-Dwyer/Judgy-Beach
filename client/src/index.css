@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* prettier-ignore */
+@layer components {
+  .btn {
+    @apply rounded-md px-[4vw] py-[2vw] text-md sm:px-[20px] sm:py-[7px] sm:text-mdPC;
+  }
+
+  .prim {
+    @apply bg-butPrimary text-butText borders hover:bg-butHover
+  }
+
+  .borders {
+    @apply border-solid border-2 rounded-md border-black
+  }
+
+  .input {
+    @apply borders p-[2vw] w-full mb-[2vw] text-md sm:text-mdPC sm:p-[7px] sm:mb-[10px] sm:w-full sm:mx-0
+  }
+
+  .link {
+    @apply hover:text-butPrimary hover:scale-[1.01] hover:cursor-pointer
+  }
+}
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Preahvihear', sans-serif;
+  background-image: url('Images/backgroundTiles.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+:root {
+  --background: 122, 122, 122;
+  --border: 0, 0, 0;
+
+  --but-primary: 0, 112, 192;
+  --but-secondary: 129, 192, 255;
+  --but-text: 0, 0, 0;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 122, 122, 122;
+    --border: 0, 0, 0;
+
+    --but-primary: 0, 102, 182;
+    --but-secondary: 129, 192, 255;
+    --but-text: 255, 255, 255;
+    --but-hover: 0, 82, 162;
+  }
+}
